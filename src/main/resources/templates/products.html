@@ -8,19 +8,26 @@
 <h1>WebBazaar</h1>
 <hr>
 <h4>Products from Uzbekistan</h4>
-<div th:each="product : ${products}">
-    <div>
+<form th:action="@{/}" method="get">
+    Find by product name: <input type="text" name="title"><br>
+    <input type="submit" value="Search">
+</form>
+
+<div th:if="${products != null}">
+    <div th:each="product : ${products}">
         <p>
             <b th:text="${product.title}"></b>
             <span th:text="${product.price}"> UZS.</span> |
             <a th:href="@{'/product/' + ${product.id}}">Read more...</a>
-
         </p>
+    </div>
+    <div th:if="${products.isEmpty()}">
+        <h3>No products</h3>
     </div>
 </div>
 <hr>
 <h3>Create new product</h3>
-<form th:action="@{/product/create}"  method="post">
+<form th:action="@{/product/create}" method="post">
     Product name: <input type="text" name="title"><br><br>
     Product description: <input type="text" name="description"><br><br>
     Product price: <input type="number" name="price"><br><br>

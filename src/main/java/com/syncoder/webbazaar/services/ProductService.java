@@ -1,39 +1,37 @@
 package com.syncoder.webbazaar.services;
 
 import com.syncoder.webbazaar.models.Product;
+import com.syncoder.webbazaar.repositories.ProductRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
+import java.util.*;
 
 @Service
+@Slf4j
+@RequiredArgsConstructor
 public class ProductService {
 
-    private List<Product> products = new ArrayList<>();
-    private long ID = 0;
+    private final ProductRepository productRepository;
 
-    {
-        products.add(new Product(++ID, "PlayStation 5", "simple description", 67.342, "Moscow", "Andrey"));
-        products.add(new Product(++ID, "Iphone 15", "simple description", 47.342, "Pitsburgh", "syncoder"));
-    }
-
-    public List<Product> listProducts() {
-        return products;
+    public List<Product> listProducts(String title) {
+        if (title != null)
+            return productRepository.findByTitle(title);
+        else
+            return productRepository.findAll();
     }
 
     public void saveProduct(Product product) {
-        product.setId(++ID);
-        products.add(product);
+        log.info("Saving new {}", product);
+        productRepository.save(product);
     }
 
     public void deleteProduct(Long id) {
-        products.removeIf(product -> product.getId().equals(id));
+        productRepository.deleteById(id);
     }
 
     public Product getProductById(Long id) {
-        return products.stream().filter(prod -> Objects.equals(prod.getId(), id)).findFirst()
-                .orElseThrow(() -> new RuntimeException("Not found"));
+        return productRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Not found!!!"));
     }
 }
