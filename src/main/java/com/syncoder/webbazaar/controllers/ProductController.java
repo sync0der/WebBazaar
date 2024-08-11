@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.web.client.RestTemplateAutoConfigu
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequiredArgsConstructor
@@ -24,14 +25,16 @@ public class ProductController {
 
     @GetMapping("/product/{id}")
     public String productInfo(@PathVariable Long id, Model model) {
-        model.addAttribute("product", productService.getProductById(id));
-
+        Product product = productService.getProductById(id);
+        model.addAttribute("product", product);
+        model.addAttribute("images", product.getImages());
         return "/product-info";
     }
 
     @PostMapping("/product/create")
-    public String createProduct(Product product) {
-        productService.saveProduct(product);
+    public String createProduct(Product product,
+                                @RequestParam("file1") MultipartFile file1, @RequestParam("file2") MultipartFile file2, @RequestParam("file3") MultipartFile file3) {
+        productService.saveProduct(product, file1, file2, file3);
         return "redirect:/";
     }
 

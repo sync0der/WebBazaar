@@ -42,4 +42,9 @@ public class Product {
     private void init() {
         createdDate = LocalDateTime.now();
     }
+
+    public void addImageToProduct(Image image){
+        image.setProduct(this);
+        this.images.add(image);
+    }
 }
