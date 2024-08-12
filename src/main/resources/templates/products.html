@@ -5,7 +5,11 @@
     <title>WebBazaar</title>
 </head>
 <body>
-<h1>WebBazaar</h1>
+<h1>WebBazaar | <a th:href="@{/login}">Sig in</a></h1>
+<form action="/logout" method="post">
+    <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+    <input type="submit" value="Exit">
+</form>
 <hr>
 <h4>Products from Uzbekistan</h4>
 <form th:action="@{/}" method="get">
