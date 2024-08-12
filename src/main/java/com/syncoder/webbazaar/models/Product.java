@@ -25,11 +25,10 @@ public class Product {
     @Column(columnDefinition = "text")
     private String description;
 
-    private Double price;
+    private Integer price;
 
     private String city;
 
-    private String author;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product")
     private List<Image> images = new ArrayList<>();
@@ -37,6 +36,10 @@ public class Product {
     private Long previewImageId;
 
     private LocalDateTime createdDate;
+
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @JoinColumn
+    private User user;
 
     @PrePersist
     private void init() {

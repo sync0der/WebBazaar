@@ -5,11 +5,20 @@
     <title>WebBazaar</title>
 </head>
 <body>
-<h1>WebBazaar | <a th:href="@{/login}">Sig in</a></h1>
-<form action="/logout" method="post">
-    <input type="hidden" name="_csrf" th:value="${_csrf.token}">
-    <input type="submit" value="Exit">
-</form>
+<h1>WebBazaar</h1>
+<hr>
+<div th:if="${user.email}">
+    <h3>Username: <i th:text="${user.name}"></i></h3>
+    <form action="/logout" method="post">
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+        <input type="submit" value="Exit">
+    </form>
+</div>
+<div th:unless="${user.email}">
+    <a th:href="@{/login}">Log in</a>
+</div>
+
+
 <hr>
 <h4>Products from Uzbekistan</h4>
 <form th:action="@{/}" method="get">
@@ -17,11 +26,11 @@
     <input type="submit" value="Search">
 </form>
 
-<div th:if="${products != null}">
+<div th:if="${products}">
     <div th:each="product : ${products}">
         <p>
             <b th:text="${product.title}"></b>
-            <span th:text="${product.price}"> UZS.</span> |
+            <span th:text="${product.price} + ' UZS.'"></span> |
             <a th:href="@{'/product/' + ${product.id}}">Read more...</a>
         </p>
     </div>
@@ -30,17 +39,19 @@
     </div>
 </div>
 <hr>
-<h3>Create new product</h3>
-<form th:action="@{/product/create}" method="post" enctype="multipart/form-data">
-    Product name: <input type="text" name="title"><br><br>
-    Product description: <input type="text" name="description"><br><br>
-    Product price: <input type="number" name="price"><br><br>
-    City: <input type="text" name="city"><br><br>
-    Author: <input type="text" name="author"><br><br>
-    First Image: <input type="file" name="file1"><br><br>
-    Second Image: <input type="file" name="file2"><br><br>
-    Third Image: <input type="file" name="file3"><br><br>
-    <input type="submit" value="Add product">
-</form>
+<div th:if="${user.email}">
+    <h3>Create new product</h3>
+    <form th:action="@{/product/create}" method="post" enctype="multipart/form-data">
+        Product name: <input type="text" name="title"><br><br>
+        Product description: <input type="text" name="description"><br><br>
+        Product price: <input type="number" name="price"><br><br>
+        City: <input type="text" name="city"><br><br>
+        First Image: <input type="file" name="file1"><br><br>
+        Second Image: <input type="file" name="file2"><br><br>
+        Third Image: <input type="file" name="file3"><br><br>
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+        <input type="submit" value="Add product">
+    </form>
+</div>
 </body>
 </html>
