@@ -40,7 +40,7 @@
                 </form>
             </div>
         </td>
-        <td><a th:href="@{/admin/user/edit{id}(id=${user.id})}">Edit</a></td>
+        <td><a th:href="@{/admin/user/edit/{id}(id=${user.id})}">Edit</a></td>
         <td><a th:href="@{/user/{id}(id=${user.id})}">Подробная информация</a></td>
         <td th:text="${user.email}"/>
     </tr>

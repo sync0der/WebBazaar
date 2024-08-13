@@ -38,16 +38,16 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/admin/user/edit/{user}")
-    public String editUser(@PathVariable("user") User user, Model model) {
-        model.addAttribute("user", user);
+    @GetMapping("/admin/user/edit/{id}")
+    public String editUser(@PathVariable Long id, Model model) {
+        model.addAttribute("user", userService.getUserById(id));
         model.addAttribute("roles", Role.values());
         return "user-edit";
     }
 
-    @PostMapping("/admin/user/edit/")
-    public String editUser(@RequestParam("userId") User user, @RequestParam Map<String, String> form) {
-        userService.changeUserRoles(user, form);
+    @PostMapping("/admin/user/edit/{id}")
+    public String editUser(@PathVariable Long id, @RequestParam Map<String, String> form) {
+        userService.changeUserRoles(userService.getUserById(id), form);
         return "redirect:/admin";
     }
 }

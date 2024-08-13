@@ -6,17 +6,15 @@
 </head>
 <body>
 <h1>WebBazaar</h1><br>
-<h3>User Editing</h3>
-<form action="/admin/user/edit/" method="post">
-    <div th:each="role : ${roles}">
-        <div>
-            <label><input type="checkbox" th:name="${role}" th:checked="${#lists.contains(roles, role)} ? true : false"></label>
-            <span th:text="${role}"/>
-        </div>
-    </div>
-<!--    <input type="hidden" th:value="${user.id}" name="userId">-->
-    <input type="hidden" th:value="${_csrf.token}" name="_csrf">
-    <button type="submit">Save</button>
+<h3>Update User Role</h3>
+<form th:action="@{/admin/user/edit/{id}(id=${user.id})}" method="post">
+    <label>
+        <input type="checkbox" name="ROLE_USER" th:checked="${user.roles.contains('ROLE_USER')}"/> User
+    </label>
+    <label>
+        <input type="checkbox" name="ROLE_ADMIN" th:checked="${user.roles.contains('ROLE_ADMIN')}"/> Admin
+    </label>
+    <button type="submit">Update</button>
 </form>
 </body>
 </html>
