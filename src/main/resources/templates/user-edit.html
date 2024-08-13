@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>WebBazaar</title>
+</head>
+<body>
+<h1>WebBazaar</h1><br>
+<h3>User Editing</h3>
+<form action="/admin/user/edit/" method="post">
+    <div th:each="role : ${roles}">
+        <div>
+            <label><input type="checkbox" th:name="${role}" th:checked="${#lists.contains(roles, role)} ? true : false"></label>
+            <span th:text="${role}"/>
+        </div>
+    </div>
+<!--    <input type="hidden" th:value="${user.id}" name="userId">-->
+    <input type="hidden" th:value="${_csrf.token}" name="_csrf">
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>

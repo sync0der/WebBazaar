@@ -13,6 +13,9 @@
         <input type="hidden" name="_csrf" th:value="${_csrf.token}">
         <input type="submit" value="Exit">
     </form>
+    <div th:if="${user.isAdmin()}">
+        <a href="/admin">Admin Panel</a>
+    </div>
 </div>
 <div th:unless="${user.email}">
     <a th:href="@{/login}">Log in</a>

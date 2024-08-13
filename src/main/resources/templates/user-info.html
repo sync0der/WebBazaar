@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>WebBazaar</title>
+</head>
+<body>
+<h1>WebBazaar</h1><br>
+<h3>Detailed Information about seller: <span th:text="${user.name}"></span></h3>
+<b>Phone number: </b><span th:text="${user.phoneNumber}"/><br>
+<b>Email address: </b><span th:text="${user.email}"/><br>
+<h4>Products:</h4>
+
+<div th:each="product : ${products}">
+    <p>
+        <b th:text="${product.title}"></b>
+        <span th:text="${product.price} + ' UZS.'"></span> |
+        <a th:href="@{'/product/' + ${product.id}}">Read more...</a>
+    </p>
+</div>
+
+
+<!--<div th:if="${errorMessage}">-->
+<!--    <h2 style="color: red" th:text="${errorMessage}"></h2>-->
+<!--</div>-->
+</body>
+</html>
