@@ -1,13 +1,15 @@
 package com.syncoder.webbazaar.controllers;
 
 import com.syncoder.webbazaar.models.Product;
+import com.syncoder.webbazaar.models.User;
 import com.syncoder.webbazaar.services.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.Banner;
-import org.springframework.boot.autoconfigure.web.client.RestTemplateAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
@@ -47,5 +49,12 @@ public class ProductController {
         return "redirect:/";
     }
 
+    @GetMapping("/my/products")
+    public String userProducts(Principal principal, Model model) {
+        User user = productService.getUserByPrincipal(principal);
+        model.addAttribute("user", user);
+        model.addAttribute("products", user.getProducts());
+        return "my-products";
+    }
 
 }

@@ -47,7 +47,14 @@
     <form th:action="@{/product/create}" method="post" enctype="multipart/form-data">
         Product name: <input type="text" name="title"><br><br>
         Product description: <input type="text" name="description"><br><br>
-        Product price: <input type="number" name="price"><br><br>
+<!--        Product price: <input type="number" name="price"><br><br>-->
+        Product price:
+        <div class="input-group">
+            <input type="text" name="price" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+            <span class="input-group-text">UZS</span>
+            <span class="input-group-text">.00</span>
+        </div>
+        <br><br>
         City: <input type="text" name="city"><br><br>
         First Image: <input type="file" name="file1"><br><br>
         Second Image: <input type="file" name="file2"><br><br>

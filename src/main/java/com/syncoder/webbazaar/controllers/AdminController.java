@@ -1,16 +1,12 @@
 package com.syncoder.webbazaar.controllers;
 
-import com.syncoder.webbazaar.models.User;
 import com.syncoder.webbazaar.models.enums.Role;
 import com.syncoder.webbazaar.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -48,6 +44,12 @@ public class AdminController {
     @PostMapping("/admin/user/edit/{id}")
     public String editUser(@PathVariable Long id, @RequestParam Map<String, String> form) {
         userService.changeUserRoles(userService.getUserById(id), form);
+        return "redirect:/admin";
+    }
+
+    @PostMapping("/admin/user/delete/{id}")
+    public String deleteUser(@PathVariable Long id){
+        userService.deleteUserById(id);
         return "redirect:/admin";
     }
 }

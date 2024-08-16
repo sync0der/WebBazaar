@@ -1,6 +1,5 @@
 package com.syncoder.webbazaar.models;
 
-import com.sun.jdi.PrimitiveValue;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

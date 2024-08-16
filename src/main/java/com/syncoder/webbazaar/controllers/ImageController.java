@@ -3,7 +3,6 @@ package com.syncoder.webbazaar.controllers;
 import com.syncoder.webbazaar.models.Image;
 import com.syncoder.webbazaar.repositories.ImageRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +25,5 @@ public class ImageController {
                 .contentType(MediaType.valueOf(image.getContentType()))
                 .contentLength(image.getSize())
                 .body(new InputStreamResource(new ByteArrayInputStream(image.getBytes())));
-
     }
 }

@@ -3,10 +3,8 @@ package com.syncoder.webbazaar.services;
 import com.syncoder.webbazaar.models.User;
 import com.syncoder.webbazaar.models.enums.Role;
 import com.syncoder.webbazaar.repositories.UserRepository;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -69,6 +67,9 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public void deleteUserById(Long id){
+        userRepository.deleteById(id);
+    }
 
     public User getUserById(Long id) {
         return userRepository.findById(id).orElse(null);
