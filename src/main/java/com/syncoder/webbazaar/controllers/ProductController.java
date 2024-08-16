@@ -49,12 +49,5 @@ public class ProductController {
         return "redirect:/";
     }
 
-    @GetMapping("/my/products")
-    public String userProducts(Principal principal, Model model) {
-        User user = productService.getUserByPrincipal(principal);
-        model.addAttribute("user", user);
-        model.addAttribute("products", user.getProducts());
-        return "my-products";
-    }
 
 }
