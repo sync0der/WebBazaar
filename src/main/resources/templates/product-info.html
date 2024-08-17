@@ -5,21 +5,25 @@
     <title>WebBazaar</title>
 </head>
 <body>
-<h1>WebBazaar</h1>
-<hr>
-<h4>Detailed information about the product</h4>
+<div class="parent">
+    <div class="child">
+        <h1>WebBazaar</h1>
+        <hr>
+        <h4>Detailed information about the product</h4>
 
-<div th:each="image : ${images}">
-    <img th:src="@{'/images/' + ${image.id}}" height="60px"/><br><br>
+        <div th:each="image : ${images}">
+            <img th:src="@{'/images/' + ${image.id}}" height="60px"/><br><br>
+        </div>
+
+        <hr>
+        <b>Product name: </b><span th:text="${product.title}"/><br/>
+        <b>Product description: </b><span th:text="${product.description}"/><br/>
+        <b>Product price: </b><span th:text="${product.price} + ' UZS'"/><br/>
+        <b>City: </b><span th:text="${product.city}"/><br/>
+        <b>Author: </b><a th:href="@{'/user/' + ${product.user.id}}" th:text="${product.user.name}"></a><br/>
+        <hr>
+    </div>
 </div>
-
-<hr>
-<b>Product name: </b><span th:text="${product.title}"/><br/>
-<b>Product description: </b><span th:text="${product.description}"/><br/>
-<b>Product price: </b><span th:text="${product.price} + ' UZS'"/><br/>
-<b>City: </b><span th:text="${product.city}"/><br/>
-<b>Author: </b><a th:href="@{'/user/' + ${product.user.id}}" th:text="${product.user.name}"></a><br/>
-<hr>
 <!--<form th:action="@{'/product/delete/' + ${product.id}}" method="post">
     <input type="submit" value="Delete product">
 </form>-->

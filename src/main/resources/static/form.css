@@ -1,3 +1,17 @@
 .element {
     outline: 2px solid black;
 }
+
+.parent {
+    height: 200px;
+    background: gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.child {
+    background-color: orange;
+    width: 100px;
+    height: 100px;
+}
