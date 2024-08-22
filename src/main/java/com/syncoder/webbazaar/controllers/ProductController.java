@@ -1,7 +1,6 @@
 package com.syncoder.webbazaar.controllers;
 
 import com.syncoder.webbazaar.models.Product;
-import com.syncoder.webbazaar.models.User;
 import com.syncoder.webbazaar.services.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

@@ -38,7 +38,6 @@ public class SecurityConfig {
                 .userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder());
         return auth.build();
-
     }
 
     @Bean
