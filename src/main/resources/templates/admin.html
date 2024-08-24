@@ -31,8 +31,8 @@
                 <td th:text="${user.email}"></td>
                 <td th:text="${user.phoneNumber}"></td>
                 <td th:text="${user.active}"></td>
-                <td th:each="role : ${user.roles}">
-                    <span th:text="${role}"></span>
+                <td>
+                    <span th:each="role, iterStat : ${user.roles}" th:text="${role} + (${!iterStat.last ? ', ' : ''})"/>
                 </td>
                 <td>
                     <div th:if="${user.isActive()}">
